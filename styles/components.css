@@ -81,18 +81,6 @@
   background-color: rgba(244, 63, 94, 0.3);
 }
 
-/* Sort Dropdown Selector */
-.sort-select {
-  background-color: var(--bg-surface);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: 6px 8px;
-  font-size: 0.8rem;
-  outline: none;
-  cursor: pointer;
-}
-
 /* Empty State Box */
 .empty-state {
   display: flex;

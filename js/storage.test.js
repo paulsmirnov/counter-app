@@ -28,7 +28,6 @@ test('saveState and loadState persist and retrieve state correctly', () => {
   const mockStorage = new MockLocalStorage();
   const testState = {
     activeProjectId: 'proj_123',
-    sortMode: 'count',
     projects: {
       proj_123: { id: 'proj_123', title: 'Test Project', counters: [], events: [] }
     }

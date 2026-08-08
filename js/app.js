@@ -64,10 +64,11 @@ class AppController {
             onDelete: () => store.deleteCounter(activeProject.id, counterId)
           });
         },
-        onSortChange: (mode) => store.setSortMode(mode, activeProject.id),
         onOpenSandwichMenu: () => {
           openSandwichMenu({
             project: activeProject,
+            onSortByCount: () => store.sortCounters(activeProject.id, 'count'),
+            onSortByTitle: () => store.sortCounters(activeProject.id, 'title'),
             onResetAll: () => store.resetAllCounters(activeProject.id),
             onDeleteProject: () => store.deleteProject(activeProject.id)
           });

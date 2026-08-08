@@ -3,7 +3,6 @@ export const STORAGE_KEY = 'counter_app_state_v1';
 
 export const INITIAL_STATE = {
   activeProjectId: null,
-  sortMode: 'manual', // 'manual' | 'count' | 'title'
   projects: {}
 };
 
@@ -18,7 +17,6 @@ export function loadState(storage = globalThis.localStorage) {
     const parsed = JSON.parse(serialized);
     return {
       activeProjectId: parsed.activeProjectId || null,
-      sortMode: parsed.sortMode || 'manual',
       projects: parsed.projects || {}
     };
   } catch (err) {

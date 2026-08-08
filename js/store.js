@@ -210,27 +210,25 @@ class Store {
     return true;
   }
 
-  // --- Sorting & Order Index Update ---
+  // --- One-Time Instant Sorting Actions ---
 
-  setSortMode(mode, projectId = null) {
-    this.state.sortMode = mode;
-    
-    // If a project is provided, re-order its orderIndex array permanently
+  sortCounters(projectId = null, criterion = 'count') {
     const targetProjectId = projectId || this.state.activeProjectId;
-    if (targetProjectId && this.state.projects[targetProjectId]) {
-      const project = this.state.projects[targetProjectId];
-      
-      if (mode === 'count') {
-        project.counters.sort((a, b) => b.count - a.count);
-      } else if (mode === 'title') {
-        project.counters.sort((a, b) => a.title.localeCompare(b.title));
-      }
-      
-      project.counters.forEach((c, index) => {
-        c.orderIndex = index;
-      });
+    if (!targetProjectId || !this.state.projects[targetProjectId]) return false;
+
+    const project = this.state.projects[targetProjectId];
+
+    if (criterion === 'count') {
+      project.counters.sort((a, b) => b.count - a.count);
+    } else if (criterion === 'title') {
+      project.counters.sort((a, b) => a.title.localeCompare(b.title));
     }
 
+    project.counters.forEach((c, index) => {
+      c.orderIndex = index;
+    });
+
+    project.updatedAt = Date.now();
     this.notify();
     return true;
   }

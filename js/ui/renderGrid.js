@@ -5,7 +5,6 @@ export function renderGrid(container, project, state, callbacks = {}) {
     onUndo,
     onTapCounter,
     onLongPressCounter,
-    onSortChange,
     onOpenSandwichMenu,
     onCreateCounterPrompt
   } = callbacks;
@@ -25,11 +24,6 @@ export function renderGrid(container, project, state, callbacks = {}) {
         <button id="btn-header-undo" class="btn-undo" ${!canUndo ? 'disabled' : ''} title="Undo Last Tap">
           <span>↩</span> Undo
         </button>
-        <select id="sort-select" class="sort-select" title="Sort Counters">
-          <option value="manual" ${state.sortMode === 'manual' ? 'selected' : ''}>Manual</option>
-          <option value="count" ${state.sortMode === 'count' ? 'selected' : ''}>By Count</option>
-          <option value="title" ${state.sortMode === 'title' ? 'selected' : ''}>A-Z</option>
-        </select>
         <button id="btn-header-menu" class="btn-icon" title="Project Actions">⋮</button>
       </div>
     </header>
@@ -69,11 +63,6 @@ export function renderGrid(container, project, state, callbacks = {}) {
 
   const menuBtn = container.querySelector('#btn-header-menu');
   if (menuBtn) menuBtn.addEventListener('click', onOpenSandwichMenu);
-
-  const sortSel = container.querySelector('#sort-select');
-  if (sortSel) sortSel.addEventListener('change', (e) => {
-    if (onSortChange) onSortChange(e.target.value);
-  });
 
   const tileBtn = container.querySelector('#btn-new-counter-tile');
   if (tileBtn) tileBtn.addEventListener('click', onCreateCounterPrompt);

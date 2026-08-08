@@ -74,13 +74,21 @@ test('Sorting by count updates orderIndex permanently', () => {
   store.tap(project.id, c2.id); // c2 has count 2
   store.tap(project.id, c1.id); // c1 has count 1
 
-  store.setSortMode('count', project.id);
+  store.sortCounters(project.id, 'count');
 
   const pState = store.getState().projects[project.id];
   assert.equal(pState.counters[0].id, c2.id);
   assert.equal(pState.counters[0].orderIndex, 0);
   assert.equal(pState.counters[1].id, c1.id);
   assert.equal(pState.counters[1].orderIndex, 1);
+
+  // Test sorting by title (A-Z)
+  store.sortCounters(project.id, 'title');
+  const pStateTitle = store.getState().projects[project.id];
+  assert.equal(pStateTitle.counters[0].id, c1.id);
+  assert.equal(pStateTitle.counters[0].orderIndex, 0);
+  assert.equal(pStateTitle.counters[1].id, c2.id);
+  assert.equal(pStateTitle.counters[1].orderIndex, 1);
 
   store.deleteProject(project.id);
 });

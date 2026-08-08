@@ -2,7 +2,7 @@
 import { openModal } from './renderModal.js';
 import { exportAndShareCSV } from '../csv.js';
 
-export function openSandwichMenu({ project, onResetAll, onDeleteProject }) {
+export function openSandwichMenu({ project, onSortByCount, onSortByTitle, onResetAll, onDeleteProject }) {
   closeSandwichMenu();
 
   const overlay = document.createElement('div');
@@ -12,6 +12,12 @@ export function openSandwichMenu({ project, onResetAll, onDeleteProject }) {
   overlay.innerHTML = `
     <div class="action-sheet">
       <div class="action-sheet-title">Project Options: ${escapeHtml(project.title)}</div>
+      <button id="menu-sort-count-btn" class="action-sheet-item">
+        <span>#️⃣</span> Sort by Count
+      </button>
+      <button id="menu-sort-title-btn" class="action-sheet-item">
+        <span>🅰️</span> Sort by Title
+      </button>
       <button id="menu-export-btn" class="action-sheet-item">
         <span>📥</span> Export CSV Summary
       </button>
@@ -29,10 +35,22 @@ export function openSandwichMenu({ project, onResetAll, onDeleteProject }) {
 
   document.body.appendChild(overlay);
 
+  const sortCountBtn = overlay.querySelector('#menu-sort-count-btn');
+  const sortTitleBtn = overlay.querySelector('#menu-sort-title-btn');
   const exportBtn = overlay.querySelector('#menu-export-btn');
   const resetAllBtn = overlay.querySelector('#menu-reset-all-btn');
   const deleteProjBtn = overlay.querySelector('#menu-delete-project-btn');
   const cancelBtn = overlay.querySelector('#menu-cancel-btn');
+
+  sortCountBtn.addEventListener('click', () => {
+    closeSandwichMenu();
+    if (onSortByCount) onSortByCount();
+  });
+
+  sortTitleBtn.addEventListener('click', () => {
+    closeSandwichMenu();
+    if (onSortByTitle) onSortByTitle();
+  });
 
   exportBtn.addEventListener('click', () => {
     closeSandwichMenu();
