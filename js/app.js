@@ -2,6 +2,8 @@ import { store } from './store.js';
 import { renderHub } from './ui/renderHub.js';
 import { renderGrid } from './ui/renderGrid.js';
 import { promptNewProject, promptNewCounter } from './ui/renderModal.js';
+import { openActionSheet } from './ui/renderSheet.js';
+import { vibrateTap, vibrateLongPress } from './haptics.js';
 
 class AppController {
   constructor() {
@@ -38,6 +40,7 @@ class AppController {
         onBackToHub: () => store.setActiveProject(null),
         onUndo: () => store.undo(activeProject.id),
         onTapCounter: (counterId) => {
+          vibrateTap();
           const res = store.tap(activeProject.id, counterId);
           if (res) {
             // Targeted DOM update for sub-millisecond tap response
@@ -49,7 +52,16 @@ class AppController {
           }
         },
         onLongPressCounter: (counterId) => {
-          console.log('Long press counter:', counterId);
+          vibrateLongPress();
+          const counter = activeProject.counters.find(c => c.id === counterId);
+          if (!counter) return;
+
+          openActionSheet({
+            counter,
+            onReset: () => store.resetCounter(activeProject.id, counterId),
+            onEdit: (newTitle, newColor) => store.updateCounter(activeProject.id, counterId, { title: newTitle, colorHex: newColor }),
+            onDelete: () => store.deleteCounter(activeProject.id, counterId)
+          });
         },
         onSortChange: (mode) => store.setSortMode(mode, activeProject.id),
         onOpenSandwichMenu: () => {
