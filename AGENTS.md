@@ -19,7 +19,7 @@
 ## Conventions Agents Get Wrong
 - **Relative `.js` Extensions**: Always include explicit `.js` extensions in ES module imports (e.g., `import { store } from './store.js'`).
 - **DOM Event Binding**: Attach event listeners via JS in `js/ui/` render modules or delegation; avoid inline `onclick="..."` HTML attributes.
-- **Conventional Commits**: Use change type prefixes (`feat:`, `fix:`, `docs:`, `chore:`, etc.) with imperative subject lines (50/72 line limit rule) and no scope; use "Co-authored-by: Antigravity" trailer.
+- **Conventional Commits**: Type prefix (`fix:`, `feat:`, etc.), imperative subject <=50 chars, no scope. Body wrapped <=72 chars. End trailer: `Co-authored-by: Antigravity`.
 - **RFC 4180 CSV Rules**: Any changes to `js/csv.js` must maintain double-quote wrapping and escaping for fields containing commas, quotes, or newlines.
 
 ## Exemplars
