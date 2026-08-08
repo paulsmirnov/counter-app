@@ -1,0 +1,8 @@
+# Temporary scratch scripts and debug files
+scratch/
+
+# OS / Editor generated files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
