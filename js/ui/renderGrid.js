@@ -36,36 +36,26 @@ export function renderGrid(container, project, state, callbacks = {}) {
     <main class="app-content">
   `;
 
-  if (counters.length === 0) {
-    html += `
-      <div class="empty-state anim-fade">
-        <div class="empty-icon">➕</div>
-        <h2 class="empty-title">No Categories Yet</h2>
-        <p class="empty-subtitle">Tap below to add your first counter category (e.g. "Toyota", "Honda", "House A").</p>
-        <button id="btn-create-first-counter" class="btn btn-primary">+ Add Category</button>
-      </div>
-    `;
-  } else {
-    html += `<div class="counter-grid anim-fade">`;
-    counters.forEach((counter) => {
-      const color = counter.colorHex || '#38bdf8';
-      html += `
-        <div class="counter-card" data-counter-id="${counter.id}" style="--card-accent: ${color};">
-          <span class="counter-title">${escapeHtml(counter.title)}</span>
-          <span class="counter-value" id="val-${counter.id}">${counter.count}</span>
-        </div>
-      `;
-    });
+  html += `<div class="counter-grid anim-fade">`;
 
-    // Inline Creation Tile at end of grid
+  counters.forEach((counter) => {
+    const color = counter.colorHex || '#38bdf8';
     html += `
-        <div id="btn-new-counter-tile" class="creation-card">
-          <span class="creation-icon">+</span>
-          <span class="creation-label">Add Category</span>
-        </div>
+      <div class="counter-card" data-counter-id="${counter.id}" style="--card-accent: ${color};">
+        <span class="counter-title">${escapeHtml(counter.title)}</span>
+        <span class="counter-value" id="val-${counter.id}">${counter.count}</span>
       </div>
     `;
-  }
+  });
+
+  // Inline Creation Tile at end of grid
+  html += `
+      <div id="btn-new-counter-tile" class="creation-card">
+        <span class="creation-icon">+</span>
+        <span class="creation-label">Add Category</span>
+      </div>
+    </div>
+  `;
 
   html += `</main>`;
   container.innerHTML = html;
@@ -84,9 +74,6 @@ export function renderGrid(container, project, state, callbacks = {}) {
   if (sortSel) sortSel.addEventListener('change', (e) => {
     if (onSortChange) onSortChange(e.target.value);
   });
-
-  const firstBtn = container.querySelector('#btn-create-first-counter');
-  if (firstBtn) firstBtn.addEventListener('click', onCreateCounterPrompt);
 
   const tileBtn = container.querySelector('#btn-new-counter-tile');
   if (tileBtn) tileBtn.addEventListener('click', onCreateCounterPrompt);
