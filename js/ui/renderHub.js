@@ -1,4 +1,6 @@
 // Projects Hub Screen Renderer (Screen A)
+import { ICON_PLUS } from './icons.js';
+
 export function renderHub(container, state, callbacks = {}) {
   const { onSelectProject, onCreateProjectPrompt } = callbacks;
   const projectList = Object.values(state.projects || {});
@@ -9,7 +11,9 @@ export function renderHub(container, state, callbacks = {}) {
         <h1 class="header-title">Counter Collections</h1>
       </div>
       <div class="header-right">
-        <button id="btn-new-project-header" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;">+ New</button>
+        <button id="btn-new-project-header" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;">
+          <span style="display: inline-flex; width: 14px; height: 14px;">${ICON_PLUS}</span> New
+        </button>
       </div>
     </header>
     <main class="app-content">
@@ -37,7 +41,7 @@ export function renderHub(container, state, callbacks = {}) {
   // Inline Creation Tile
   html += `
       <div id="btn-new-project-tile" class="creation-card">
-        <span class="creation-icon">+</span>
+        <span class="creation-icon">${ICON_PLUS}</span>
         <span class="creation-label">New Project</span>
       </div>
     </div>

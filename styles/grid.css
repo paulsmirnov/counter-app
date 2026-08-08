@@ -97,6 +97,15 @@
   font-weight: 300;
   margin-bottom: 4px;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.creation-icon svg {
+  display: block;
+  width: 24px;
+  height: 24px;
 }
 
 .creation-label {

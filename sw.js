@@ -7,6 +7,15 @@ const ASSETS_TO_CACHE = [
   './styles/grid.css',
   './styles/components.css',
   './js/app.js',
+  './js/store.js',
+  './js/storage.js',
+  './js/csv.js',
+  './js/ui/icons.js',
+  './js/ui/renderGrid.js',
+  './js/ui/renderHub.js',
+  './js/ui/renderModal.js',
+  './js/ui/renderSandwichMenu.js',
+  './js/ui/renderSheet.js',
   './icons/icon.svg'
 ];
 

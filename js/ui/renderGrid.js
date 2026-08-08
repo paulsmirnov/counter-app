@@ -1,4 +1,6 @@
 // Counter Grid Screen Renderer (Screen B)
+import { ICON_BACK, ICON_UNDO, ICON_MENU, ICON_PLUS } from './icons.js';
+
 export function renderGrid(container, project, state, callbacks = {}) {
   const {
     onBackToHub,
@@ -17,14 +19,14 @@ export function renderGrid(container, project, state, callbacks = {}) {
   let html = `
     <header class="app-header">
       <div class="header-left">
-        <button id="btn-header-back" class="btn-icon" title="Back to Projects Hub">←</button>
+        <button id="btn-header-back" class="btn-icon" title="Back to Projects Hub">${ICON_BACK}</button>
         <h1 class="header-title">${escapeHtml(project.title)}</h1>
       </div>
       <div class="header-right">
         <button id="btn-header-undo" class="btn-undo" ${!canUndo ? 'disabled' : ''} title="Undo Last Tap">
-          <span>↩</span> Undo
+          <span class="undo-icon-wrap">${ICON_UNDO}</span> Undo
         </button>
-        <button id="btn-header-menu" class="btn-icon" title="Project Actions">⋮</button>
+        <button id="btn-header-menu" class="btn-icon" title="Project Actions">${ICON_MENU}</button>
       </div>
     </header>
     <main class="app-content">
@@ -45,7 +47,7 @@ export function renderGrid(container, project, state, callbacks = {}) {
   // Inline Creation Tile at end of grid
   html += `
       <div id="btn-new-counter-tile" class="creation-card">
-        <span class="creation-icon">+</span>
+        <span class="creation-icon">${ICON_PLUS}</span>
         <span class="creation-label">Add Category</span>
       </div>
     </div>
