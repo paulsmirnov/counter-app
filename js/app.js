@@ -3,6 +3,7 @@ import { renderHub } from './ui/renderHub.js';
 import { renderGrid } from './ui/renderGrid.js';
 import { promptNewProject, promptNewCounter } from './ui/renderModal.js';
 import { openActionSheet } from './ui/renderSheet.js';
+import { openSandwichMenu } from './ui/renderSandwichMenu.js';
 import { vibrateTap, vibrateLongPress } from './haptics.js';
 
 class AppController {
@@ -65,7 +66,11 @@ class AppController {
         },
         onSortChange: (mode) => store.setSortMode(mode, activeProject.id),
         onOpenSandwichMenu: () => {
-          console.log('Open sandwich menu');
+          openSandwichMenu({
+            project: activeProject,
+            onResetAll: () => store.resetAllCounters(activeProject.id),
+            onDeleteProject: () => store.deleteProject(activeProject.id)
+          });
         },
         onCreateCounterPrompt: () => {
           promptNewCounter((title, colorHex) => {
