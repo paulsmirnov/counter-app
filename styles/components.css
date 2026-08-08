@@ -154,8 +154,23 @@
   margin-bottom: 16px;
 }
 
+.modal-body {
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.modal-body p {
+  margin: 0;
+}
+
 .form-group {
   margin-bottom: 20px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
 }
 
 .form-label {
