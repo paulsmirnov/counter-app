@@ -11,6 +11,8 @@ const COLOR_PRESETS = [
   '#818cf8'  // Indigo
 ];
 
+let activeViewportHandler = null;
+
 export function openModal({ title, bodyHtml, confirmText = 'Create', onConfirm, onCancel }) {
   closeModal(); // Close any existing modal
 
@@ -31,12 +33,34 @@ export function openModal({ title, bodyHtml, confirmText = 'Create', onConfirm, 
 
   document.body.appendChild(overlay);
 
+  // Soft Keyboard & Visual Viewport Handler
+  if (window.visualViewport) {
+    const handleViewportChange = () => {
+      const vv = window.visualViewport;
+      overlay.style.top = `${vv.offsetTop}px`;
+      overlay.style.height = `${vv.height}px`;
+
+      const dialog = overlay.querySelector('.modal-dialog');
+      if (dialog) {
+        dialog.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    };
+
+    activeViewportHandler = handleViewportChange;
+    window.visualViewport.addEventListener('resize', handleViewportChange);
+    window.visualViewport.addEventListener('scroll', handleViewportChange);
+    handleViewportChange();
+  }
+
   const confirmBtn = overlay.querySelector('#modal-confirm-btn');
   const cancelBtn = overlay.querySelector('#modal-cancel-btn');
   const input = overlay.querySelector('input');
 
   if (input) {
-    setTimeout(() => input.focus(), 100);
+    setTimeout(() => {
+      input.focus();
+      if (activeViewportHandler) activeViewportHandler();
+    }, 100);
   }
 
   const handleConfirm = () => {
@@ -71,6 +95,12 @@ export function openModal({ title, bodyHtml, confirmText = 'Create', onConfirm, 
 }
 
 export function closeModal() {
+  if (window.visualViewport && activeViewportHandler) {
+    window.visualViewport.removeEventListener('resize', activeViewportHandler);
+    window.visualViewport.removeEventListener('scroll', activeViewportHandler);
+    activeViewportHandler = null;
+  }
+
   const existing = document.getElementById('active-modal-overlay');
   if (existing) {
     existing.remove();
