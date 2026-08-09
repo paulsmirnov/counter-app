@@ -10,11 +10,6 @@ export function renderHub(container, state, callbacks = {}) {
       <div class="header-left">
         <h1 class="header-title">Counter Collections</h1>
       </div>
-      <div class="header-right">
-        <button id="btn-new-project-header" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;">
-          <span style="display: inline-flex; width: 14px; height: 14px;">${ICON_PLUS}</span> New
-        </button>
-      </div>
     </header>
     <main class="app-content">
   `;
@@ -51,9 +46,6 @@ export function renderHub(container, state, callbacks = {}) {
   container.innerHTML = html;
 
   // Bind Event Listeners
-  const headerBtn = container.querySelector('#btn-new-project-header');
-  if (headerBtn) headerBtn.addEventListener('click', onCreateProjectPrompt);
-
   const tileBtn = container.querySelector('#btn-new-project-tile');
   if (tileBtn) tileBtn.addEventListener('click', onCreateProjectPrompt);
 
