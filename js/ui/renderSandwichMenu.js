@@ -19,13 +19,13 @@ export function openSandwichMenu({ project, onSortByCount, onSortByTitle, onRese
         <span>🅰️</span> Sort by Title
       </button>
       <button id="menu-export-btn" class="action-sheet-item">
-        <span>📥</span> Export CSV Summary
+        <span>📦</span> Export CSV Summary
       </button>
       <button id="menu-reset-all-btn" class="action-sheet-item">
         <span>🔄</span> Reset All Counters to 0
       </button>
       <button id="menu-delete-project-btn" class="action-sheet-item danger">
-        <span>🗑️</span> Delete Project
+        <span>❌</span> Delete Project
       </button>
       <button id="menu-cancel-btn" class="action-sheet-item" style="margin-top: 8px; justify-content: center; color: var(--text-secondary);">
         Cancel

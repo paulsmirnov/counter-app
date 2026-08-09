@@ -308,19 +308,27 @@
 
 .action-sheet-item {
   width: 100%;
-  padding: 14px 16px;
+  padding: 10px 14px;
   background: transparent;
   border: none;
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   text-align: left;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
   transition: background-color var(--transition-fast);
+}
+
+.action-sheet-item span:first-child {
+  font-size: 1.5rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .action-sheet-item:active {
